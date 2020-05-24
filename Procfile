@@ -1,1 +1,1 @@
-web: gunicorn usertest.wsgi
+web: gunicorn Techomato.wsgi
