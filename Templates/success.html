@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <title>Registration Successfull</title>
+<body>
+<center>Your account is successfully created.</center>
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="card" style="width: 320px; height:600px">
+            <img class="card-img-top" src="{{x.image.url}}" alt="Card image cap" style="width: 320px; height:300px">
+          <div class="card-body">
+            <h5 class="card-title">{{x.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{x.dob}}</h6>
+            <p class="card-text">{{x.email}}</p>
+            <p class="card-text">{{x.phone}}</p>
+            <a href="{{x.image.url}}" class="card-link">View Photo</a>
+          </div>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock content %}

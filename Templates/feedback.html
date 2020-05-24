@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <title>Feedback</title>
+    <body>
+    <br><br>
+    <center>
+<h3>Feedback Form</h3>
+    </center>
+
+    <form class="container" method="post">
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">How was your test/competition?</label>
+    <select class="form-control" name="test" id="exampleFormControlSelect1">
+      <option>Very Good</option>
+      <option>Fine</option>
+      <option>Average</option>
+      <option>Bad</option>
+      <option>Very Poor</option>
+    </select>
+  </div>
+
+          <div class="form-group">
+    <label for="exampleFormControlSelect2">How are the study materials?</label>
+    <select  class="form-control" name="study" id="exampleFormControlSelect2">
+      <option>Very Good</option>
+      <option>Fine</option>
+      <option>Average</option>
+      <option>Bad</option>
+      <option>Very Poor</option>
+    </select>
+  </div>
+                  <div class="form-group">
+    <label for="exampleFormControlSelect2">How was your coding experience in Techomato Compiler?</label>
+    <select  class="form-control" name="compiler" id="exampleFormControlSelect2">
+      <option>Very Good</option>
+      <option>Fine</option>
+      <option>Average</option>
+      <option>Bad</option>
+      <option>Very Poor</option>
+    </select>
+  </div>
+          <div class="form-group">
+    <label for="exampleFormControlSelect2">How was your overall experience?</label>
+    <select  class="form-control" name="overall" id="exampleFormControlSelect2">
+      <option>Very Good</option>
+      <option>Fine</option>
+      <option>Average</option>
+      <option>Bad</option>
+      <option>Very Poor</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Any suggestion for us...</label>
+    <textarea class="form-control" name="suggestion" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+        <div class="form-group">
+    <label for="exampleFormControlTextarea1">Your Comment</label>
+    <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+                          <div class="form-group">
+    <label for="exampleFormControlSelect2">Rate Our Page</label>
+    <select  class="form-control" name="rating" id="exampleFormControlSelect2">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+      <option>9</option>
+      <option>10</option>
+    </select>
+  </div>
+                {% csrf_token %}
+     <button class="btn btn-success" type="submit">Submit Feedback</button>
+</form>
+    </body>
+{% endblock content %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <title>Join Competition</title>
+<body>
+<br><br><br>
+<div class="container" role="alert" style="width: auto;">
+    <h3 class="alert alert-info" style="padding-left: 10px"><b>Previous Competitions</b></h3><br>
+{% if lenold > 0 %}
+    <div class="row">
+    {% for x in previous %}
+  <div class="col-sm-4">
+    <div class="card bg-dark text-light">
+      <div class="card-body" style="height: 200px">
+          <center>
+              <h5 class="card-title"><b>Coding Competition</b> {{ x.comp_id }}</h5>
+        <p class="card-text">{{ x.date_added }}</p>
+        <p class="card-text">{{ x.question }}</p>
+          </center>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-warning" style="padding-left: 10px">No competition was scheduled previously. You can code and submit when a new competition is started.</div><br>
+
+{% endif %}
+  </div>
+
+</div>
+<br><br>
+<div class="container" role="alert" style="width: auto;">
+    <h3 class="alert alert-info" style="padding-left: 10px"><b>Current Competitions
+    </b></h3><br>
+{% if lennew > 0 %}
+    <div class="row">
+    {% for x in new %}
+  <div class="col-sm-4">
+    <div class="card bg-dark text-light">
+      <div class="card-body" style="height: 250px">
+          <center>
+              <h5 class="card-title"><b>Coding Competition</b> {{ x.comp_id }}</h5>
+        <p class="card-text">{{ x.date_added }}</p>
+        <p class="card-text">{{ x.question }}</p>
+
+        <a href="/codingcomp/" class="btn btn-light btn-lg">Join Competition Now</a>
+          </center>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-warning" style="padding-left: 10px">No competition is scheduled today. You can code and submit when a new competition is started.</div><br>
+{% endif %}
+  </div>
+<br><br><br><br><br><br>
+
+</body>
+{% endblock content %}

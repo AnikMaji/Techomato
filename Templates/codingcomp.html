@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <title>Coding Competition</title>
+
+     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>$(document).delegate('#source, #input', 'keydown', function(e) {
+  var keyCode = e.keyCode || e.which;
+
+  if (keyCode == 9) {
+    e.preventDefault();
+    var start = $(this).get(0).selectionStart;
+    var end = $(this).get(0).selectionEnd;
+
+    // set textarea value to: text before caret + tab + text after caret
+    $(this).val($(this).val().substring(0, start)
+                + "\t"
+                + $(this).val().substring(end));
+
+    // put caret at right position again
+    $(this).get(0).selectionStart =
+    $(this).get(0).selectionEnd = start + 1;
+  }
+});
+
+
+</script>
+    <style>
+    .fixed{
+        background-image: url({% static 'images/apple.png'%});
+        z-index: -1;
+        height:900px;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+    }
+    </style>
+<body>
+<center>
+<h1 class="bg-dark text-light">DAILY CODING COMPETITION</h1>
+</center>
+    <div class="jumbotron bg-dark text-light" style="padding-left:20px; padding-right: 20px; padding-top: 40px ; margin-top: -10px; font-family: 'Times New Roman'; font-size: 24px">
+        <h3>Question:</h3>
+    {{ comp.question }}
+        <br><br><h3>Input pattern:</h3>
+    {{ comp.input_pattern }}<br><br>
+        <h3>Output Pattern:</h3>
+    {{ comp.output_pattern }}<br><br>
+        <h3>Sample Test Case:</h3>
+        {% for x in sampletests %}
+            Test Case-{{ x.id }}<br>
+        <h5>Input:</h5>
+        {{ x.input }}
+        <h5>Output:</h5>
+        {{ x.output }}<br><br>
+        {% endfor %}
+    </div>
+
+    <div class="fixed">
+    <div class="comdark" >
+        <center><h3><b>Techomato Code Compiler</b></h3></center>
+    {% if myerrormsg %}
+ <form class="container" method="post"  enctype="multipart/form-data"style="width: 1000px">
+     {% csrf_token %}
+  <select class="container bg-dark text-light border-dark custom-select float-right my-2 mx-3 form-control " id="codingLang" name="codingLang" style="width: 227px;">
+    <option selected>{{ request.session.codingLang}}</option>
+    <option value="C">C</option>
+    <option value="CSHARP">CSHARP</option>
+    <option value="CPP11">CPP11</option>
+    <option value="CPP14">CPP14</option>
+    <option value="CLOJURE">CLOJURE</option>
+    <option value="GO">GO</option>
+    <option value="HASKELL">HASKELL</option>
+    <option value="JAVA">JAVA</option>
+    <option value="JAVA8">JAVA8</option>
+    <option value="PASCAL">PASCAL</option>
+    <option value="PERL">PERL</option>
+    <option value="PHP">PHP</option>
+    <option value="PYTHON">PYTHON</option>
+    <option value="PYTHON3">PYTHON3</option>
+    <option value="R">R</option>
+    <option value="RUBY">RUBY</option>
+    <option value="SCALA">SCALA</option>
+  </select>
+     <div class="container" >
+  <div class="form-group">
+    <textarea class="bg-dark text-light border-dark form-control" id="source" name="source" rows="10">{{ request.session.sourceCode }}</textarea>
+  </div><br>
+
+         <div class="alert alert-warning" role="alert">
+             {{ myerrormsg }}
+</div>
+         <button class="btn btn-info" id="compile" name="compile" type="submit">Compile</button>
+         <button class="btn btn-info" id="submit" name="submit" type="submit" style="margin-left: 325px">Submit Code</button>
+         <button class="btn btn-info float-right" id="run" name="run" type="submit">Run Test Cases</button>
+         </div>
+            </form>
+{% elif myCompilationMsg %}
+         <form class="container" method="post"  enctype="multipart/form-data"style="width: 1000px">
+     {% csrf_token %}
+ <select class="container bg-dark text-light border-dark custom-select float-right my-2 mx-3 form-control " id="codingLang" name="codingLang" style="width: 227px;">
+    <option selected>{{ request.session.codingLang}}</option>
+    <option value="C">C</option>
+    <option value="CSHARP">CSHARP</option>
+    <option value="CPP11">CPP11</option>
+    <option value="CPP14">CPP14</option>
+    <option value="CLOJURE">CLOJURE</option>
+    <option value="GO">GO</option>
+    <option value="HASKELL">HASKELL</option>
+    <option value="JAVA">JAVA</option>
+    <option value="JAVA8">JAVA8</option>
+    <option value="PASCAL">PASCAL</option>
+    <option value="PERL">PERL</option>
+    <option value="PHP">PHP</option>
+    <option value="PYTHON">PYTHON</option>
+    <option value="PYTHON3">PYTHON3</option>
+    <option value="R">R</option>
+    <option value="RUBY">RUBY</option>
+    <option value="SCALA">SCALA</option>
+  </select>
+     <div class="container" >
+
+
+  <div class="form-group">
+    <textarea class="bg-dark text-light border-dark form-control" id="source" name="source" rows="10">{{ request.session.sourceCode }}</textarea>
+  </div><br>
+         <div class="alert alert-success " role="alert">
+             <h5>OUTPUT</h5>
+             {% for x in myCompilationMsg %}
+                {{ x }}<br>
+             {% endfor %}
+</div>
+         <button class="btn btn-info" id="compile" name="compile" type="submit">Compile</button>
+         <button class="btn btn-info" id="submit" name="submit" type="submit" style="margin-left: 325px">Submit Code</button>
+         <button class="btn btn-info float-right" id="run" name="run" type="submit">Run Test Cases</button>
+         </div>
+            </form>
+    {% elif results %}
+         <form class="container" method="post"  enctype="multipart/form-data"style="width: 1000px">
+     {% csrf_token %}
+ <select class="container bg-dark text-light border-dark custom-select bg-dark text-light float-right my-2 mx-3 form-control " id="codingLang" name="codingLang" style="width: 227px;">
+    <option selected>{{ request.session.codingLang}}</option>
+    <option value="C">C</option>
+    <option value="CSHARP">CSHARP</option>
+    <option value="CPP11">CPP11</option>
+    <option value="CPP14">CPP14</option>
+    <option value="CLOJURE">CLOJURE</option>
+    <option value="GO">GO</option>
+    <option value="HASKELL">HASKELL</option>
+    <option value="JAVA">JAVA</option>
+    <option value="JAVA8">JAVA8</option>
+    <option value="PASCAL">PASCAL</option>
+    <option value="PERL">PERL</option>
+    <option value="PHP">PHP</option>
+    <option value="PYTHON">PYTHON</option>
+    <option value="PYTHON3">PYTHON3</option>
+    <option value="R">R</option>
+    <option value="RUBY">RUBY</option>
+    <option value="SCALA">SCALA</option>
+  </select>
+     <div class="container" >
+
+
+  <div class="form-group">
+    <textarea class="bg-dark text-light border-dark form-control" id="source" name="source" rows="10">{{ request.session.sourceCode }}</textarea>
+  </div><br>
+{#         <div class="alert alert-success" role="alert">#}
+{#             <h5>OUTPUT</h5>#}
+{#             {% for key, value in results.items %}#}
+{#                {{ key }} = {{ value }}<br>#}
+{#             {% endfor %}#}
+{#</div>#}
+         <button class="btn btn-info" id="compile" name="compile" type="submit">Compile</button>
+         <button class="btn btn-info" id="submit" name="submit" type="submit" style="margin-left: 325px">Submit Code</button>
+         <button class="btn btn-info float-right" id="run" name="run" type="submit">Run Test Cases</button>
+         </div>
+            </form>
+
+    {% else %}
+    <form class="container" method="post"  enctype="multipart/form-data"style="width: 1000px">
+     {% csrf_token %}
+ <select class="container bg-dark text-light border-dark custom-select float-right my-2 mx-3 form-control" id="codingLang" name="codingLang" style="width: 227px;">
+    <option selected>Choose Coding Language</option>
+    <option value="C">C</option>
+    <option value="CSHARP">CSHARP</option>
+    <option value="CPP11">CPP11</option>
+    <option value="CPP14">CPP14</option>
+    <option value="CLOJURE">CLOJURE</option>
+    <option value="GO">GO</option>
+    <option value="HASKELL">HASKELL</option>
+    <option value="JAVA">JAVA</option>
+    <option value="JAVA8">JAVA8</option>
+    <option value="PASCAL">PASCAL</option>
+    <option value="PERL">PERL</option>
+    <option value="PHP">PHP</option>
+    <option value="PYTHON">PYTHON</option>
+    <option value="PYTHON3">PYTHON3</option>
+    <option value="R">R</option>
+    <option value="RUBY">RUBY</option>
+    <option value="SCALA">SCALA</option>
+  </select>
+     <div class="container" >
+
+
+  <div class="form-group">
+    <textarea  class="bg-dark text-light border-dark form-control" id="source" name="source" rows="10">Write your code here...</textarea>
+  </div><br>
+         <button class="btn btn-info" name="compile" type="submit">Compile</button>
+         <button class="btn btn-info" id="submit" name="submit" type="submit" style="margin-left: 325px">Submit Code</button>
+         <button class="btn btn-info float-right" type="submit" name="run">Run Test Cases</button>
+         </div>
+            </form>
+    {% endif %}
+    <div class="container" style="margin-top: 30px; width: 1000px">
+    <div class="row">
+        {% if results %}
+            {% for key, value in results.items %}
+                {% if value %}
+        <div class="col-md-4">
+        <div class="alert alert-success" role="alert">
+            <center>
+                <b>
+ Test Case - {{ key }} Passed
+            </b></center>
+</div>
+        </div>
+                    {% else %}
+                            <div class="col-md-4">
+        <div class="alert alert-danger" role="alert">
+            <center><b>
+ Test Case - {{ key }} Failed
+            </b>           </center>
+</div>
+        </div>
+                {% endif %}
+    {% endfor %}
+            {% else %}
+                {% for x in testcases %}
+        <div class="col-md-4">
+        <div class="alert alert-info" role="alert">
+            <center>
+                <b>
+                    Test Case - {{ x.id }}
+                </b></center>
+</div>
+        </div>
+    {% endfor %}
+    {% endif %}
+    </div>
+    </div>
+    </div>
+
+    </div>
+
+</body>
+<br><br><br><br><br><br><br><br><br><br>
+{% endblock content %}

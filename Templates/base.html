@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+        $(document).ready(function(){
+
+$('ul li').click(function(){
+
+$('li').removeClass('active');
+
+$(this).addClass('active');
+});
+});
+    </script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<script src="{% static '/js/nav.js' %}"></script>
+	<link href="{% static 'css/styles.css' %}" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+	<style>
+		html,body{
+			height: 100%;
+			width: 100%;
+			{#font-family: 'Roboto Mono', monospace;#}
+
+			color: #222;
+
+		}
+		.navbar{
+			padding: .8rem;
+		}
+		.navbar-nav li{
+			padding-right: 20px;
+		}
+		.nav-link{
+			font-size: 1.2em !important;
+		}
+		.x{
+			height: 50px;
+			width: 175px;
+		}
+		.social a{
+			font-size: 4.5em;
+			padding: 3rem;
+		}
+		.fa-facebook{
+			color: #3b5998;
+		}
+		.fa-twitter{
+			color: #00aced;
+		}
+		.fa-google-plus-g{
+			color: #dd4b39;
+		}
+		.fa-instagram{
+			color: #517fa4;
+		}
+		.fa-facebook:hover,
+		.fa-twitter:hover,
+		.fa-google-plus-g:hover,
+		.fa-instagram:hover{
+			color: #d5d5d5;
+		}
+		footer{
+			background-color: #3f3f3f;
+			color: #d5d5d5;
+			padding-top: 2rem;
+		}
+		hr.light{
+			border-top: 1px solid #d5d5d5;
+			width: 65%;
+			margin-top: 0.8rem;
+			margin-bottom: 1rem;
+		}
+		footer a{
+			color: #d5d5d5;
+		}
+		hr.light-100{
+			border-top: 1px solid #d5d5d5;
+			width: 100%;
+			margin-top: 0.8rem;
+			margin-bottom: 1rem; 
+		}
+	</style>
+</head>
+<body>
+<!-- Navigation -->
+ <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top" style="font-size: 15px; padding-top: 0px; padding-bottom: 0px">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="/"><img class ="x" src="{% static '/images/logo.png'%}">
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item ">
+					<a class="nav-link" href="/">Home</a>
+				</li>
+				<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Knowledge Hub
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/courses/">View All Courses</a>
+          <a class="dropdown-item" href="/studymaterials">Study Materials</a>
+          <a class="dropdown-item" href="/tests">Weekend Evaluation</a>
+          <a class="dropdown-item" href="/compreview">Daily Coding Competition</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/compiler">Online Coding Platform</a>
+        </div>
+      </li>
+                {% if request.session.logged_in %}
+                    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Hello {{ request.session.userfName }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/dashboard/">Dashboard</a>
+          <a class="dropdown-item" href="/yourtests/">Your Tests</a>
+          <a class="dropdown-item" href="/joinedcomps/">Your Competitions</a>
+          <a class="dropdown-item" href="/accsettings/">Account Settings</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/logout">Logout</a>
+        </div>
+      </li>
+                {% else %}
+				<li class="nav-item">
+					<a class="nav-link" href="/login">Login</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/register">Sign up</a>
+				</li>
+                {% endif %}
+            				<li class="nav-item">
+					<a class="nav-link" href="/contactus">Contact Us</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+
+{% block content %}
+<!--- Image Slider -->
+
+
+<!--- Jumbotron -->
+
+
+<!--- Welcome Section -->
+
+
+<!--- Three Column Section -->
+
+
+<!--- Two Column Section -->
+
+
+<!--- Fixed background -->
+
+
+<!--- Emoji Section -->
+
+
+<!--- Meet the team -->
+
+
+<!--- Cards -->
+
+
+<!--- Two Column Section -->
+{% endblock content %}
+<!--- Connect -->
+<div class="container-fluid padding">
+	<div class="row text-center padding">
+		<div class="col-12">
+			<h2>Connect</h2>
+		</div>
+		<div class="col-12 social padding">
+			<a href="https://www.facebook.com/TechomatO-110922820634899/?modal=admin_todo_tour"><i class="fab fa-facebook"></i></a>
+			<a href="https://twitter.com/OmatoTech"><i class="fab fa-twitter"></i></a>
+			<a href="#"><i class="fab fa-instagram"></i></a>	 
+		</div>
+	</div>
+</div>	
+
+
+<center>
+<!--- Footer -->
+<footer>
+<div class="container-fluid padding">
+	<div class="row text-center">
+		<div class="col-md-4">
+			<h3>Contact us</h3>
+			<hr class="light">
+			<p>+91 8653720323</p>
+			<p>techomato.server@gmail.com</p>
+			<p>Kanyapur, Asansol, 713305</p>
+			<p>West Burdwan</p>
+
+		</div>
+		<div class="col-md-4">
+			<h3>Help-Line Numbers</h3>
+			<hr class="light">
+			<p>+91 9475382132</p>
+			<p>+91 7908867569</p>
+			<p>+91 9635270177</p>
+			<p>+91 9635587205</p>
+
+		</div>
+		<div class="col-md-4">
+			<h3>HeadOffices</h3>
+			<hr class="light">
+			<p>Kanyapur, Asansol</p>
+			<p>City Centre, Durgapur</p>
+			<p>Khatra, Bankura</p>
+		</div>
+		<div class="col-md-12">
+			<hr class="light-100">
+			<h5>&copy; TechOmatO.com</h5>
+		</div>	
+	</div>
+</div>
+</footer>
+
+</center>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!--- Check out my courses! -->

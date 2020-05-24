@@ -1,0 +1,114 @@
+{% extends 'baseUser.html' %}
+{% load static %}
+{% block content %}
+    <div id="dash" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <h2 style="padding-left: 20px; padding-top: 10px">Dashboard</h2><hr>
+           <br>
+<div class="row" style="padding-left: 20px">
+<div class="card border-white" style="width: 1080px; padding-left: 30px">
+  <div class="row ">
+    <div class="col-md-4">
+{#      <img src="{{ user.image.url }}" class="card-img" alt="User Profile Image" style="width: 200px; height: 200px"><br>#}
+{#                <a href="{{user.image.url}}" class="card-link">View Photo</a>#}
+        <div class="card border-white text-white" style="padding-left: 15px">
+  <img src="{{user.image.url}}" class="card-img" alt="User Profile Image" style="width: 200px; height: 200px">
+  <div class="card-img-overlay" style="padding-top: 170px; padding-left: 75px">
+      <a href="{{user.image.url}}" class="card-link text-light">View Photo</a>
+  </div>
+</div>
+        <div><br>
+        </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body" style=" font-size: 18px;padding-left: 100px">
+        <h4 class="alert-primary alert card-title">{{ user.fname }} {{ user.lname }}</h4>
+        <p class="alert-primary alert card-text">Email Address: {{ user.email }}
+        <br>
+        Phone NO.: {{ user.phone }}</p>
+{#        <p class="alert-info alert card-text">{{ user.phone }}</p>#}
+      </div>
+    </div>
+    </div>
+    </div>
+    <div class="container">
+    <h3 class="alert alert-info" ><b>Your Today's Tests</b></h3><br>
+{% if lentestData > 0 %}
+            <div class="row">
+    {% for x in testData %}
+  <div class="col-sm-4">
+    <div class="card bg-primary text-light">
+      <div class="card-body" style="height: 300px; padding-top: 10px">
+          <center>
+              <h5 class="card-title"><b>Weekend Evaluation</b> {{ x.test_id }}</h5>
+        <p class="card-text">{{ x.course.courseName }} Test</p>
+        <p class="card-text">Test Type: {{ x.test_category }}</p>
+        <p class="card-text">Date: {{ x.date_added }}</p>
+        <p class="card-text">Full Marks: {{ x.full_marks }}</p>
+
+        <a href="/taketest/{{ x.test_id }}" class="btn btn-light btn-lg">Join Test Now</a>
+          </center>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+            </div><br>
+    {% else %}
+    <div class="alert alert-warning" >No competition is scheduled today. You can code and submit when a new competition is started.</div><br>
+{% endif %}
+  </div><br><br>
+
+<div class="container">
+    <h3 class="alert alert-info" style="padding-left: 10px"><b>Today's Competitions</b></h3><br>
+{% if lennew > 0 %}
+    <div class="row">
+    {% for x in new %}
+  <div class="col-sm-4">
+    <div class="card bg-dark text-light">
+      <div class="card-body" style="height: 250px; margin-left: 10px; margin-top: 10px">
+          <center>
+              <h5 class="card-title"><b>Coding Competition</b> {{ x.comp_id }}</h5>
+        <p class="card-text">{{ x.date_added }}</p>
+        <p class="card-text">{{ x.question }}</p>
+
+        <a href="/codingcomp/" class="btn btn-light btn-lg">Join Competition Now</a>
+          </center>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-warning" style="padding-left: 10px">No competition was scheduled today. You can code and submit when a new competition is started.</div><br>
+
+{% endif %}
+<br>
+  </div>
+    <div class="container">
+    <h3 class="alert alert-info" ><b>Your Test Results</b></h3><br>
+{% if lenres > 0 %}
+            <div class="row">
+    {% for x in testResults %}
+  <div class="col-sm-4">
+    <div class="card bg-success text-light" >
+      <div class="card-body" style="height: 280px; margin-top: 10px; margin-left: 10px">
+          <center>
+              <h5 class="card-title"><b>Weekend Evaluation</b> {{ x.test.test_id }}</h5>
+        <p class="card-text">{{ x.test.course.courseName }} Test</p>
+        <p class="card-text">Date: {{ x.test.date_added }}</p>
+        <p class="card-text">Full Marks: {{ x.test.full_marks }}</p>
+        <p class="card-text">Obtained Marks: {{ x.marks }}</p>
+        <p class="card-text">Obtained Result: {{ x.result }}%</p>
+          </center>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+            </div><br>
+    {% else %}
+    <div class="alert alert-warning" >No competition is scheduled today. You can code and submit when a new competition is started.</div><br>
+{% endif %}
+  </div><br><br>
+</div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+{% endblock content %}

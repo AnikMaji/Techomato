@@ -1,0 +1,34 @@
+{% extends 'baseStudy.html' %}
+    <title>C</title>
+{% block content %}
+<body>
+<div class="row">
+  <div class="col-3">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        {% for x in topics %}
+      <a class="nav-link" id="{{ x.id }}" data-toggle="pill" href="#v-pills-{{ x.id }}" role="tab" aria-controls="{{ x.id }}" aria-selected="false">{{ x.topicLabel }}</a>
+   {% endfor %}
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="tab-content" id="v-pills-tabContent">
+        {% for x in topics %}
+     <div class="tab-pane fade" id="v-pills-{{ x.id }}" role="tabpanel" aria-labelledby="{{ x.id }}">
+     {% for y in headings %}
+         {% if y.topic.id == x.id %}
+             <h4><center>{{ y.headingLabel }}</center></h4>
+             <br>
+         <b1>{{ y.headingText }}</b1>
+             <br><br>
+         {% endif %}
+         {% endfor %}
+     </div>
+
+    {% endfor %}
+    </div>
+  </div>
+</div></div>
+<br><br><br><br><br>
+
+</body>
+{% endblock content %}

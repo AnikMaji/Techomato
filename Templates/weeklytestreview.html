@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <title>Weekly Tests</title>
+<body>
+<br><br><br>
+
+<div class="container" role="alert" style="width: auto;">
+{% if errormsg %}
+    <div class="container alert alert-danger" role="alert">
+        {{ errormsg }}
+</div>
+{% endif %}
+    <h3 class="alert alert-info" style="padding-left: 10px"><b>Previous Tests</b></h3><br>
+{% if lengthold > 0 %}
+    <div class="row">
+    {% for x in old %}
+  <div class="col-sm-4">
+    <div class="card bg-dark text-light"  style="margin-top: 10px">
+      <div class="card-body" style="height: 250px;">
+          <center>
+              <h5 class="card-title"><b>Weekend Evaluation</b> {{ x.test_id }}</h5>
+        <h5 class="card-text">Course: {{ x.course.courseName }}</h5>
+        <p class="card-text">{{ x.date_added }}</p>
+        <p class="card-text">Test Type: {{ x.test_category }}</p>
+        <p class="card-text">F.M.: {{ x.full_marks }}</p>
+          </center>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-warning" style="padding-left: 10px">No test is scheduled previously. You can write and submit when a new test is started.</div><br>
+
+{% endif %}
+  </div>
+<br><br>
+<div class="container" role="alert" style="width: auto;">
+    <h3 class="alert alert-info" style="padding-left: 10px"><b>Ongoing Tests
+    </b></h3><br>
+{% if lengthnew > 0 %}
+    <div class="row">
+    {% for x in new %}
+  <div class="col-sm-4">
+    <div class="card bg-dark text-light" style="margin-top: 10px">
+      <div class="card-body" style="height: 300px">
+          <center>
+              <h5 class="card-title"><b>Weekend Evaluation</b> {{ x.test_id }}</h5>
+        <h5 class="card-text">Course: {{ x.course.courseName }}</h5>
+        <p class="card-text">{{ x.date_added }}</p>
+        <p class="card-text">Test Type: {{ x.test_category }}</p>
+        <p class="card-text">F.M.: {{ x.full_marks }}</p>
+        <a href="/taketest/{{ x.test_id }}" class="btn btn-light btn-lg">Evaluate Now</a>
+          </center>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-warning" style="padding-left: 10px">No test is scheduled today. You can write and submit when a new test is started.</div><br>
+{% endif %}
+  </div>
+<br><br>
+<div class="container" role="alert" style="width: auto;">
+    <h3 class="alert alert-info" style="padding-left: 10px"><b>Upcoming Tests
+    </b></h3><br>
+{% if lengthup > 0 %}
+    <div class="row">
+    {% for x in upcoming %}
+  <div class="col-sm-4">
+    <div class="card bg-dark text-light" style="margin-top: 10px">
+      <div class="card-body" style="height: 250px">
+          <center>
+              <h5 class="card-title"><b>Weekend Evaluation</b> {{ x.test_id }}</h5>
+        <h5 class="card-text">Course: {{ x.course.courseName }}</h5>
+        <p class="card-text">{{ x.date_added }}</p>
+        <p class="card-text">Test Type: {{ x.test_category }}</p>
+        <p class="card-text">F.M.: {{ x.full_marks }}</p>
+          </center>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-warning" style="padding-left: 10px">No test is scheduled next. You can write and submit when a new test is started.</div><br>
+{% endif %}
+  </div>
+<br><br><br><br><br><br>
+
+</body>
+{% endblock content %}

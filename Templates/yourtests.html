@@ -1,0 +1,60 @@
+{% extends 'baseUser.html' %}
+{% load static %}
+{% block content %}
+    <div id="dash" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <h2 style="padding-left: 30px; padding-top: 10px">Your Tests</h2><hr>
+<div class="row" style="padding-left: 20px">
+    <div class="container">
+    <h3 class="alert alert-info" ><b>Your Today's Tests</b></h3><br>
+{% if lentestData > 0 %}
+            <div class="row">
+    {% for x in testData %}
+  <div class="col-sm-4">
+    <div class="card bg-primary text-light">
+      <div class="card-body" style="height: 300px; padding-top: 10px">
+          <center>
+              <h5 class="card-title"><b>Weekend Evaluation</b> {{ x.test_id }}</h5>
+        <p class="card-text">{{ x.course.courseName }} Test</p>
+        <p class="card-text">Test Type: {{ x.test_category }}</p>
+        <p class="card-text">Date: {{ x.date_added }}</p>
+        <p class="card-text">Full Marks: {{ x.full_marks }}</p>
+
+        <a href="/taketest/{{ x.test_id }}" class="btn btn-light btn-lg">Join Test Now</a>
+          </center>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+            </div><br>
+    {% else %}
+    <div class="alert alert-warning" >No test is scheduled today. You can write and submit when a new test is started.</div><br>
+{% endif %}
+  </div><br><br>
+    <div class="container">
+    <h3 class="alert alert-info" ><b>Your Previous Tests</b></h3><br>
+{% if lenoldtestData > 0 %}
+            <div class="row">
+    {% for x in oldtestData %}
+  <div class="col-sm-4">
+    <div class="card bg-secondary text-light">
+      <div class="card-body" style="height: 250px; padding-top: 10px">
+          <center>
+              <h5 class="card-title"><b>Weekend Evaluation</b> {{ x.test_id }}</h5>
+        <p class="card-text">{{ x.course.courseName }} Test</p>
+        <p class="card-text">Test Type: {{ x.test_category }}</p>
+        <p class="card-text">Date: {{ x.date_added }}</p>
+        <p class="card-text">Full Marks: {{ x.full_marks }}</p>
+          </center>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+            </div><br>
+    {% else %}
+    <div class="alert alert-warning" >No test is scheduled previously. You can write and submit when a new test is started.</div><br>
+{% endif %}
+  </div><br><br>
+</div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+{% endblock content %}

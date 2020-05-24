@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <title>Courses</title>
+<body>
+<div class="container padding">
+	<div class="welcome text-center">
+		<div class=col-12>
+			<h1 class="display-4">Courses</h1>
+		</div>
+		<hr>
+	</div>
+</div>
+<div class="container padding">
+
+	<div class="row padding">
+        {% for x in courses %}
+		<div class="col-md-4" style="margin-bottom: 20px">
+            <center>
+			<div class="card card-size shadow-lg" style="width: 18rem; ">
+				<img class="card-img-top" src="{{ x.image.url }}" style="height: 200px;">
+				<div class="card-body" style="height: 200px">
+					<h4 class="card-title">{{ x.courseName }}</h4>
+					<p class="card-text">{{ x.courseDescription}}</p>
+                    </div>
+                <div class="card-footer">
+                    <a href="/subject/{{x.courseID}}" class="btn btn-outline-primary">Apply Now</a>
+                </div>
+            </div>
+                </center>
+
+		</div>
+        {% endfor %}
+	</div>
+
+</div>
+</body>
+<br><br><br><br><br><br><br><br><br><br>
+{% endblock content %}

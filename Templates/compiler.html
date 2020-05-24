@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+    <title>Compiler</title>
+{% block content %}
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>$(document).delegate('#source, #input', 'keydown', function(e) {
+  var keyCode = e.keyCode || e.which;
+
+  if (keyCode == 9) {
+    e.preventDefault();
+    var start = $(this).get(0).selectionStart;
+    var end = $(this).get(0).selectionEnd;
+
+    // set textarea value to: text before caret + tab + text after caret
+    $(this).val($(this).val().substring(0, start)
+                + "\t"
+                + $(this).val().substring(end));
+
+    // put caret at right position again
+    $(this).get(0).selectionStart =
+    $(this).get(0).selectionEnd = start + 1;
+  }
+});
+
+
+</script>
+    <style>
+    .fixed{
+        background-image: url("{% static 'images/apple.png'%}");
+        {#background-image: url(https://techomatobucket.s3.us-west-1.amazonaws.com/images/myapple.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjECEaCXVzLWVhc3QtMSJIMEYCIQC3WNTehCv4m39I8gzcqijjGSJ7%2BTZWRIDu%2FDXxBcBgNgIhAJG8zSDDLVLGBWMDIkL6S8Mn7cPF%2BttKpQ4N24clEXr9KvgBCHoQABoMNzI2MjQ1MDAxMTE3IgzMgxlATJmUm5CitPkq1QEDVq2ee6Yk2ksqROWDCt3EDRCdpj50UwuVPbuP7064wAox%2Ftuimj3b6ss1DqeyCAuI3bkcEoPvN19%2Br8%2Fu0HTbRZ4qOXB7VnT1M0rbEZ17wZb0di4E%2BI9PUL6bGDCVhHuYHR%2BeB3C%2FqVl75U1ypTCMMy%2F0A4Ux%2BALpl7KFtNjZ0%2F1WO2vFAiVP0sdDMOUBhyV9EoAsWt9j8S27HfD0f%2BDisIIwDE6CRCedDvTLSvqj9dJFMiwpmRT0Bwx7xD2eRrgd1kKzyEJGfTMwrJMQg0fRmxOdEQYw09Gq9gU69QIWMfkWA%2B6EZYEmuBZ8cHpekRONWolTokCKqOLqXzctfNU6%2FmL8XvuXzLGxrnh9DFazxmow52rqZslYGRtcAdi2nbcYFrxWOdp6fDdGb9n3w03p3JwB4uRPc9CRPwqoWiKPYQNmequvuffAOFK1DLroY0BRb4Dn1GblqqVatiEypNrQtvX74anGO1mXQA7LOoN9q3ipo2hSsqIx04FUV09S9LfjQTsBuisnphUL0Xl8TntRa%2BWermafEfoRQI4V6%2F0a%2BXU3vYwldwRd1hgIevx8db58nOQQO5RFoyVp1OdAa3RIovAc32a2hyElC7rA7amI1wBx7tleNaGKkn1dzrn7ZneDf3q1BPJHQ%2FifN19enitNV41NVWEszlZi6iZGL%2Br4Rskbow8Yd9DbU2s8mNCn9Kk4BZ0GNkdvDpafiDr%2F5pojJTdEfDfbXkGh3Jz5u78WS25IJZH2Oh8eDgb8xBLYj5YeL5Sdu13EsgIjF0GJWJ1FGyIW&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200524T190046Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIA2SF4TI6OYLJ57V5Z%2F20200524%2Fus-west-1%2Fs3%2Faws4_request&X-Amz-Signature=2e70aab0cb1ba520e4eb2fd4ab33b97fe0e27bcbc896f7a88aa817fadccad064);#}
+        z-index: -1;
+        height:900px;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+    }
+    </style>
+<body>
+    <div class="fixed">
+    <div class="comdark" >
+    <center><h3>Techomato Code Compiler</h3></center>
+    {% if myerrormsg %}
+ <form class="container" method="post"  enctype="multipart/form-data"style="width: 1000px">
+     {% csrf_token %}
+  <select class="container bg-dark text-light border-dark custom-select float-right my-2 mx-3 form-control " id="codingLang" name="codingLang" style="width: 227px;">
+    <option selected>{{ request.session.codingLang}}</option>
+    <option value="C">C</option>
+    <option value="CSHARP">CSHARP</option>
+    <option value="CPP11">CPP11</option>
+    <option value="CPP14">CPP14</option>
+    <option value="CLOJURE">CLOJURE</option>
+    <option value="GO">GO</option>
+    <option value="HASKELL">HASKELL</option>
+    <option value="JAVA">JAVA</option>
+    <option value="JAVA8">JAVA8</option>
+    <option value="PASCAL">PASCAL</option>
+    <option value="PERL">PERL</option>
+    <option value="PHP">PHP</option>
+    <option value="PYTHON">PYTHON</option>
+    <option value="PYTHON3">PYTHON3</option>
+    <option value="R">R</option>
+    <option value="RUBY">RUBY</option>
+    <option value="SCALA">SCALA</option>
+  </select>
+     <div class="container" >
+  <div class="form-group">
+    <textarea class="bg-dark text-light border-dark form-control" id="source" name="source" rows="10">{{ request.session.sourceCode }}</textarea>
+  </div><br>
+      <div class="form-group">
+    <textarea class="bg-dark text-light border-dark form-control" id="source" name="input" rows="2">{{ request.session.input }}</textarea>
+  </div><br>
+         <div class="alert alert-warning" role="alert">
+             {{ myerrormsg }}
+</div>
+         <button class="btn btn-info" id="compile" name="compile" type="submit">Compile</button>
+         <button class="btn btn-info float-right"" id="run" name="run" type="submit">Run Test Cases</button>
+         </div>
+            </form>
+{% elif myCompilationMsg %}
+         <form class="container" method="post"  enctype="multipart/form-data"style="width: 1000px">
+     {% csrf_token %}
+ <select class="container bg-dark text-light border-dark custom-select float-right my-2 mx-3 form-control " id="codingLang" name="codingLang" style="width: 227px;">
+    <option selected>{{ request.session.codingLang}}</option>
+    <option value="C">C</option>
+    <option value="CSHARP">CSHARP</option>
+    <option value="CPP11">CPP11</option>
+    <option value="CPP14">CPP14</option>
+    <option value="CLOJURE">CLOJURE</option>
+    <option value="GO">GO</option>
+    <option value="HASKELL">HASKELL</option>
+    <option value="JAVA">JAVA</option>
+    <option value="JAVA8">JAVA8</option>
+    <option value="PASCAL">PASCAL</option>
+    <option value="PERL">PERL</option>
+    <option value="PHP">PHP</option>
+    <option value="PYTHON">PYTHON</option>
+    <option value="PYTHON3">PYTHON3</option>
+    <option value="R">R</option>
+    <option value="RUBY">RUBY</option>
+    <option value="SCALA">SCALA</option>
+  </select>
+     <div class="container" >
+
+
+  <div class="form-group">
+    <textarea class="bg-dark text-light border-dark form-control" id="source" name="source" rows="10">{{ request.session.sourceCode }}</textarea>
+  </div><br>
+      <div class="form-group">
+    <textarea class="bg-dark text-light border-dark form-control" id="source" name="input" rows="2">{{ request.session.input }}</textarea>
+  </div><br>
+         <div class="alert alert-success " role="alert">
+             <h5>OUTPUT</h5>
+             {% for x in myCompilationMsg %}
+                {{ x }}<br>
+             {% endfor %}
+</div>
+         <button class="btn btn-info" id="compile" name="compile" type="submit">Compile</button>
+         <button class="btn btn-info float-right"" id="run" name="run" type="submit">Run Test Cases</button>
+         </div>
+            </form>
+    {% elif myRunMsg %}
+         <form class="container" method="post"  enctype="multipart/form-data"style="width: 1000px">
+     {% csrf_token %}
+ <select class="container bg-dark text-light border-dark custom-select bg-dark text-light float-right my-2 mx-3 form-control " id="codingLang" name="codingLang" style="width: 227px;">
+    <option selected>{{ request.session.codingLang}}</option>
+    <option value="C">C</option>
+    <option value="CSHARP">CSHARP</option>
+    <option value="CPP11">CPP11</option>
+    <option value="CPP14">CPP14</option>
+    <option value="CLOJURE">CLOJURE</option>
+    <option value="GO">GO</option>
+    <option value="HASKELL">HASKELL</option>
+    <option value="JAVA">JAVA</option>
+    <option value="JAVA8">JAVA8</option>
+    <option value="PASCAL">PASCAL</option>
+    <option value="PERL">PERL</option>
+    <option value="PHP">PHP</option>
+    <option value="PYTHON">PYTHON</option>
+    <option value="PYTHON3">PYTHON3</option>
+    <option value="R">R</option>
+    <option value="RUBY">RUBY</option>
+    <option value="SCALA">SCALA</option>
+  </select>
+     <div class="container" >
+
+
+  <div class="form-group">
+    <textarea class="bg-dark text-light border-dark form-control" id="source" name="source" rows="10">{{ request.session.sourceCode }}</textarea>
+  </div><br>
+      <div class="form-group">
+    <textarea class="bg-dark text-light border-dark form-control" id="source" name="input" rows="2">{{ request.session.input }}</textarea>
+  </div><br>
+         <div class="alert alert-success" role="alert">
+             <h5>OUTPUT</h5>
+             {% for x in myRunMsg %}
+                {{ x }}<br>
+             {% endfor %}
+</div>
+         <button class="btn btn-info" id="compile" name="compile" type="submit">Compile</button>
+         <button class="btn btn-info float-right"" id="run" name="run" type="submit">Run Test Cases</button>
+         </div>
+            </form>
+
+    {% else %}
+    <form class="container" method="post"  enctype="multipart/form-data"style="width: 1000px">
+     {% csrf_token %}
+ <select class="container bg-dark text-light border-dark custom-select float-right my-2 mx-3 form-control" id="codingLang" name="codingLang" style="width: 227px;">
+    <option selected>Choose Coding Language</option>
+    <option value="C">C</option>
+    <option value="CSHARP">CSHARP</option>
+    <option value="CPP11">CPP11</option>
+    <option value="CPP14">CPP14</option>
+    <option value="CLOJURE">CLOJURE</option>
+    <option value="GO">GO</option>
+    <option value="HASKELL">HASKELL</option>
+    <option value="JAVA">JAVA</option>
+    <option value="JAVA8">JAVA8</option>
+    <option value="PASCAL">PASCAL</option>
+    <option value="PERL">PERL</option>
+    <option value="PHP">PHP</option>
+    <option value="PYTHON">PYTHON</option>
+    <option value="PYTHON3">PYTHON3</option>
+    <option value="R">R</option>
+    <option value="RUBY">RUBY</option>
+    <option value="SCALA">SCALA</option>
+  </select>
+     <div class="container" >
+
+
+  <div class="form-group">
+    <textarea  class="bg-dark text-light border-dark form-control" id="source" name="source" rows="10">Write your code here...</textarea>
+  </div><br>
+      <div class="form-group">
+    <textarea  class="bg-dark text-light border-dark form-control" id="source" name="input" rows="2">Provide your inputs here...</textarea>
+  </div><br>
+         <button class="btn btn-info" name="compile" type="submit">Compile</button>
+         <button class="btn btn-info float-right" type="submit" name="run">Run Test Cases</button>
+         </div>
+            </form>
+    {% endif %}
+
+    </div>
+
+    </div>
+
+</body>
+    <br><br><br><br><br><br><br><br><br><br>
+{% endblock content %}

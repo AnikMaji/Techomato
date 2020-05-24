@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+<title>Preview {{ data.courseName }}</title>
+{% block content %}
+<body>
+<h2></h2>
+<br><br><br>
+<center>
+<div class="container">
+
+    <div class="card text-center">
+  <div class="card-header bg-dark text-light">
+   Latest Technology
+  </div>
+  <div class="card-body alert-secondary ">
+    <h3 class="card-title">{{ data.courseName }}</h3>
+    <p class="card-text">Category: {{ data.courseCat }}</p>
+    <p class="card-text">Level: {{ data.courseType }}</p>
+    <p class="card-text">{{ data.courseDescription }}</p>
+  </div>
+  <div class="card-footer bg-dark text-light">
+    Join Now
+  </div>
+</div><br><br>
+
+    <form method="post" action="joincourse">
+        {% csrf_token %}
+     <button class="btn btn-success" type="submit">Join {{ data.courseName }} Course</button>
+    </form>
+</div>
+</center><br><br><br><br><br><br>
+</body>
+{% endblock content %}

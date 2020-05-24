@@ -1,0 +1,36 @@
+{% extends 'baseUser.html' %}
+{% load static %}
+{% block content %}
+    <div id="dash" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <h2 style="padding-left: 30px; padding-top: 10px">Your Test Scores</h2><hr>
+           <br>
+<div class="row" style="padding-left: 20px">
+    <div class="container">
+    <h3 class="alert alert-info" ><b>Results</b></h3><br>
+{% if lenres > 0 %}
+            <div class="row">
+    {% for x in testResults %}
+  <div class="col-sm-4">
+    <div class="card bg-success text-light" >
+      <div class="card-body" style="height: 280px; margin-top: 10px; margin-left: 10px">
+          <center>
+              <h5 class="card-title"><b>Weekend Evaluation</b> {{ x.test.test_id }}</h5>
+        <p class="card-text">{{ x.test.course.courseName }} Test</p>
+        <p class="card-text">Date: {{ x.test.date_added }}</p>
+        <p class="card-text">Full Marks: {{ x.test.full_marks }}</p>
+        <p class="card-text">Obtained Marks: {{ x.marks }}</p>
+        <p class="card-text">Obtained Result: {{ x.result }}%</p>
+          </center>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+            </div><br>
+    {% else %}
+    <div class="alert alert-warning" >You have not given any test yet. Please write and submit one first.</div><br>
+{% endif %}
+  </div><br><br>
+</div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+{% endblock content %}

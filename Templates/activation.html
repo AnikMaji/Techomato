@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <title>Activate Your Account</title>
+<body>
+<br><br>
+<div class="container alert alert-success" style="width: 920px" role="alert">
+  A secret key has been sent to your email. Please go to your mail and activate your account.
+</div>
+<div class="container" style="width: 400px">
+<form method="post">
+     {% csrf_token %}
+                 <div class="form-group row">
+    <div class="col">
+      <input type="text" class="form-control" name="otp" id="otp" placeholder="Secret Key">
+    </div>
+  </div>
+    <center>
+     <button class="btn btn-info" type="submit">Activate</button>
+    </center>
+</form>
+</div>
+</body>
+<br><br><br><br>
+<br><br>
+{% endblock content %}

@@ -1,0 +1,128 @@
+{% extends 'baseUser.html' %}
+{% load static %}
+{% block content %}
+    <title>Account Settings</title>
+   <div id="dash" class="col-md-10">
+        <h2 style="padding-left: 20px; padding-top: 10px">Account Settings</h2>
+           <br>
+<div class="row" style="padding-left: 20px">
+<div class="card border-light" style="width: 1080px">
+  <div class="row ">
+    <div class="col-md-4">
+        <div class="card border-white text-white" >
+  <img src="{{user.image.url}}" class="card-img" alt="User Profile Image" style="width: 200px; height: 200px">
+  <div class="card-img-overlay" style="padding-top: 170px; padding-left: 60px">
+      <a href="{{user.image.url}}" class="card-link text-light">View Photo</a>
+  </div>
+        </div>
+            <div><br>
+            <form method="post"enctype="multipart/form-data">
+                {% csrf_token %}
+                <input class="form-control text-dark" type="file" name="image" id="image"><br>
+                <div>
+                  <button class="btn" type="submit" name="updateImage" >Update Image</button><br><br>
+                  </div>
+            </form>
+        </div>
+        <div><br>
+        </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body" style="padding-left: 100px">
+        <h4 class="alert-primary alert card-title">{{ user.fname }} {{ user.lname }}</h4>
+        <p class="alert-primary alert card-text">{{ user.email }}
+        <br>
+        {{ user.phone }}</p>
+{#        <p class="alert-info alert card-text">{{ user.phone }}</p>#}
+      </div>
+    </div>
+              {% if imageerrormsg %}
+            <div class=" alert alert-warning" role="alert" style="margin-left: 10px">
+        {{ imageerrormsg }}
+</div>
+              {% elif imagesuccessrmsg %}
+            <div class=" alert alert-success" role="alert" style="margin-left: 10px">
+        {{ imagesuccessrmsg }}
+</div>
+        {% endif %}
+
+      <div class="container" style="padding-top: 10px">
+          <h5><b>Account Details</b></h5>
+              <form method="post">
+                  {% csrf_token %}
+  <div class="form-row">
+    <div class="col col-md-6">
+        <label for="fname">First Name</label>
+      <input type="text" class="form-control" id="fname" name="fname" placeholder={{ user.fname }}>
+    </div>
+    <div class="col col-md-6">
+        <label for="lname">Last Name</label>
+      <input type="text" id="lname" name="lname" class="form-control" placeholder={{ user.lname }}>
+    </div>
+  </div>
+                  <div class="form-group">
+        <label for="lname">Phone Number</label>
+                      <input type="text" id="phone" name="phone" class="form-control" placeholder={{ user.phone }}>
+    </div>
+                  <div>
+                  <button type="submit" name="updateDetails" class="btn">Update Details</button>
+                  </div>
+
+</form><br>
+      </div>
+  {% if detailerrormsg %}
+      {% for x in detailerrormsg %}
+            <div class=" alert alert-danger" role="alert" style="margin-left: 10px">
+        {{ x }}
+</div>
+  {% endfor %}
+  {% endif %}
+              {% if detailsuccessmsg %}
+           {% for x in detailsuccessmsg %}
+            <div class=" alert alert-success" role="alert" style="margin-left: 10px">
+        {{ x }}
+</div>
+  {% endfor %}
+        {% endif %}
+
+      <div class="container" style="padding-top: 20px">
+          <h5><b>Password Settings</b></h5>
+          <form method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                  <label for="cpwd">Current Password</label>
+                   <input type="password" id="cpwd" name="cpwd" class="form-control" placeholder="Current Password">
+                   <label for="npwd">New Password</label>
+                   <input type="password" id="npwd" name="npwd" class="form-control" placeholder="New Password">
+                   <label for="rpwd">Retype Password</label>
+                   <input type="password" id="rpwd" name="rpwd" class="form-control" placeholder="Retype Password">
+                      </div>
+                                    <div>
+                  <button type="submit" name="updatePassword" class="btn">Update Password</button>
+                  </div>
+
+          </form><br>
+      </div>
+                {% if passworderrormsg %}
+            <div class=" alert alert-warning" role="alert" style="margin-left: 10px">
+        {{ passworderrormsg }}
+</div>
+              {% elif passwordsuccessmsg %}
+            <div class=" alert alert-success" role="alert" style="margin-left: 10px">
+        {{ passwordsuccessmsg }}
+</div>
+        {% endif %}
+  </div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+</div>
+{% endblock content %}

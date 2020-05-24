@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <title>Start Test</title>
+
+<body>
+<div class="container" style="padding-top: 10px">
+    <br>
+    <h3 style="padding-left: 20px; padding-top: 20px"><b>{{ test.course.courseName }} Test</b></h3>
+    <br>
+    <h3 style="padding-left: 20px"><b>Guidelines:</b></h3>
+    <div class="jumbotron alert-info rounded" style="padding-left: 20px; padding-top: 50px">
+        <b>
+    1. All popups/tabs/switches will log you out from the test automatically.<br>
+    2. Every question has 4 options. Tick the correct option. <br>
+    3. Don't try to cheat.<br>
+    4. You can submit the test whenever you want.<br>
+            5. Test scores will be sent to the registered email address.</b>
+    </div>
+    <br><br>
+    <center>
+    <a class="btn btn-info" href="/starttest/{{ test.test_id }}">Start Test</a><br><br><br><br><br><br><br><br>
+    </center>
+</div>
+</body>
+{% endblock content %}

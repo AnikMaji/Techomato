@@ -1,0 +1,5 @@
+class password:
+    pwd= "MaHaKAAL"
+
+
+
