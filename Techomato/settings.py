@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'y-gs-ru%!o9p_wom98(o7(ezcr+z1%&6+tc=og)_y*(ezc7o^t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['techomato.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['techomato.herokuapp.com']
 
 
 # Application definition
