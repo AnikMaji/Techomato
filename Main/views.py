@@ -528,6 +528,7 @@ def subject(request, course_id):
                     for x in topics:
                         h = Heading.objects.filter(topic=x)
                         for x in h:
+                            x.headingText=x.headingText.split("\n")
                             headings.append(x)
                     print(len(a))
                     print(joinedCoursesIDs)
