@@ -18,8 +18,10 @@
          {% if y.topic.id == x.id %}
              <h4><center>{{ y.headingLabel }}</center></h4>
              <br>
-         <b1>{{ y.headingText }}</b1>
-             <br><br>
+             {% for z in y.headingText %}
+         <b1>{{ z }}</b1>
+             <br>
+             {% endfor %}<br>
          {% endif %}
          {% endfor %}
      </div>
