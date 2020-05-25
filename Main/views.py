@@ -536,7 +536,7 @@ def subject(request, course_id):
                     return render(request,'subject.html',{'coursesJoined':coursesData, 'topics':topics, 'headings':headings, 'length':len(a), 'temp':"False"})
             print(request.session['course_id'])
             c=Course.objects.get(courseID=course_id)
-            return render(request, 'JoinCourse.html', {'data': c})
+            return render(request, 'joinCourse.html', {'data': c})
         else:
             return redirect("/login/")
 
