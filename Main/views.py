@@ -44,6 +44,7 @@ def index(request):
         e=request.session['logged_out']
     except:
         request.session['logged_in']=False
+        request.session['logged']=False
     try:
         a=Course.objects.all()[:3]
         b=Course.objects.all()[len(Course.objects.all())-2:]
@@ -206,7 +207,7 @@ def register(request):
                         else:
                             return render(request, 'register2.html', {'mymsg': 'Invalid Phone Number', 'logged': False})
                     else:
-                        return render(request, 'register.html', {'mymsg': 'Invalid Password', 'logged': False})
+                        return render(request, 'register2.html', {'mymsg': 'Invalid Password', 'logged': False})
                 else:
                     return render(request, 'register2.html', {'mymsg': 'Invalid Email ID', 'logged': False})
             else:
