@@ -6,7 +6,7 @@
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <style>
         .fixed{
-        background-image: url("{% static 'images/apple.png'%}");
+        background-image: url({{ STATIC_URL}}'images/apple.png');
         z-index: -1;
         height: 800px;
         background-repeat: no-repeat;
@@ -16,7 +16,7 @@
     }
   .jumbotron
         {
-        background-image: url("{% static 'images/c.png' %}");
+        background-image: url({{STATIC_URL}}'images/c.png');
         z-index: -1;
         height: 100%;
         color: white;
