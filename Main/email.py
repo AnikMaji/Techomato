@@ -48,7 +48,8 @@ Subject: Registration Successful
 
         global email
         obj=Decode()
-        pwd=obj.funcDecode(b'gAAAAABetnY87Y--hKREey7_cOAg-bQNDyuyCJioK8owaLx4RRGZXocSF8kH80MIgsPwXcWIGM84Vcd8JDhvrvOAQBH1eZntUQ==')
+        #pwd=obj.funcDecode(b'gAAAAABetnY87Y--hKREey7_cOAg-bQNDyuyCJioK8owaLx4RRGZXocSF8kH80MIgsPwXcWIGM84Vcd8JDhvrvOAQBH1eZntUQ==')
+        pwd="server@007"
         sender = 'techomato.server@gmail.com'
 
         print(otp)
@@ -85,7 +86,8 @@ Subject: Verify Your Email
 
         global email
         obj=Decode()
-        pwd=obj.funcDecode(b'gAAAAABetnY87Y--hKREey7_cOAg-bQNDyuyCJioK8owaLx4RRGZXocSF8kH80MIgsPwXcWIGM84Vcd8JDhvrvOAQBH1eZntUQ==')
+        #pwd=obj.funcDecode(b'gAAAAABetnY87Y--hKREey7_cOAg-bQNDyuyCJioK8owaLx4RRGZXocSF8kH80MIgsPwXcWIGM84Vcd8JDhvrvOAQBH1eZntUQ==')
+        pwd="server@007"
         sender = 'techomato.server@gmail.com'
         message = """From: TechOmato <techomato.server@gmail.com>
 To: {}
@@ -112,8 +114,8 @@ Subject: Registration Successful
 
     def sendasubmitTestEmail(self,request, marks, result):
         obj = Decode()
-        pwd = obj.funcDecode(
-            b'gAAAAABetnY87Y--hKREey7_cOAg-bQNDyuyCJioK8owaLx4RRGZXocSF8kH80MIgsPwXcWIGM84Vcd8JDhvrvOAQBH1eZntUQ==')
+        #pwd=obj.funcDecode(b'gAAAAABetnY87Y--hKREey7_cOAg-bQNDyuyCJioK8owaLx4RRGZXocSF8kH80MIgsPwXcWIGM84Vcd8JDhvrvOAQBH1eZntUQ==')
+        pwd="server@007"
         sender = 'techomato.server@gmail.com'
         message = """From: TechOmato <techomato.server@gmail.com>
 To: {}
@@ -141,8 +143,8 @@ Subject: Submission Complete
             print(e)
     def sendasubmitCompEmail(self,request, passed, result):
         obj = Decode()
-        pwd = obj.funcDecode(
-            b'gAAAAABetnY87Y--hKREey7_cOAg-bQNDyuyCJioK8owaLx4RRGZXocSF8kH80MIgsPwXcWIGM84Vcd8JDhvrvOAQBH1eZntUQ==')
+       #pwd=obj.funcDecode(b'gAAAAABetnY87Y--hKREey7_cOAg-bQNDyuyCJioK8owaLx4RRGZXocSF8kH80MIgsPwXcWIGM84Vcd8JDhvrvOAQBH1eZntUQ==')
+        pwd="server@007"
         sender = 'techomato.server@gmail.com'
         message = """From: TechOmato <techomato.server@gmail.com>
 To: {}
